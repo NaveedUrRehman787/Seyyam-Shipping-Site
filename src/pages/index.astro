@@ -1,0 +1,325 @@
+---
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Icon from '../components/Icon.astro';
+import { site, services, stats } from '../data/site.js';
+
+const why = [
+  { icon: 'shield', title: 'Suppliers verified first', body: 'We check licences, capacity and certifications on site before you send a deposit — not after.' },
+  { icon: 'check',  title: 'Defects caught in China', body: 'Pre-shipment inspection while the goods are still the supplier’s responsibility to fix.' },
+  { icon: 'ship',   title: 'Freight that fits', body: 'Sea, air or rail. Port-to-port if you have a broker, door-to-door if you would rather we handled it.' },
+  { icon: 'chat',   title: 'One contact, real updates', body: 'A named person who answers, and a status update every week the order is live — not silence.' },
+];
+
+const steps = [
+  { n: '01', title: 'Tell us the product', body: 'Send a spec, a photo, or a link. We come back with realistic pricing and lead times.' },
+  { n: '02', title: 'We verify the factory', body: 'On-site audit, licence checks, capacity assessment. You get a written report.' },
+  { n: '03', title: 'We inspect the goods', body: 'Pre-shipment QC against your checklist, with photo evidence of anything wrong.' },
+  { n: '04', title: 'We ship it to you', body: 'Freight booked, customs cleared, delivered. Tracking the whole way.' },
+];
+
+const testimonials = [
+  { quote: 'They caught a stitching defect across 40% of our order at inspection. Finding that in our warehouse instead of theirs would have cost us the season.', name: 'James Wilson', role: 'Founder, Outdoor apparel brand', place: 'United Kingdom' },
+  { quote: 'The factory audit report was blunt about a supplier we were about to commit to. They found us two alternatives in the same week.', name: 'David Miller', role: 'Procurement Lead', place: 'United States' },
+  { quote: 'Door-to-door pricing was clear up front, duties included. No surprise invoice at the destination port, which is not something I can say about our last forwarder.', name: 'Ahmed Khan', role: 'Importer', place: 'Pakistan' },
+];
+
+const faq = [
+  { q: 'What is the minimum order you work with?', a: 'There is no hard minimum for inspection or audit services. For full sourcing we work best above roughly $5,000 order value, simply because supplier attention drops below that.' },
+  { q: 'How do you charge?', a: 'Factory audits and inspections are flat per-visit fees quoted up front. Sourcing is either a flat fee or a percentage of order value, agreed before we start. No hidden supplier commissions.' },
+  { q: 'Do you take commission from factories?', a: 'No. We are paid by you, which is the only way our incentives stay pointed in your direction.' },
+  { q: 'Which regions do you cover?', a: 'All major manufacturing clusters — Guangdong, Zhejiang, Jiangsu, Fujian, Shandong — plus Yiwu for small goods.' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: site.name,
+      publisher: { '@id': `${site.url}/#organization` } },
+    { '@type': 'FAQPage', mainEntity: faq.map((f) => ({
+        '@type': 'Question', name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  ],
+};
+---
+<Base schema={schema}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="eyebrow">{site.name} · China sourcing &amp; shipping</p>
+        <h1>Source from China without the guesswork</h1>
+        <p class="lede">
+          We verify the factory, inspect the goods before they ship, and move the freight
+          to your door — coordinated from Karachi with an official China desk in Yiwu.
+          You get evidence at every step instead of promises.
+        </p>
+        <div class="hero__cta">
+          <a href="/contact-us/" class="btn btn--primary">Get a free quote <Icon name="arrow" size={16} /></a>
+          <a href="/services/" class="btn btn--ghost">See what we do</a>
+        </div>
+        <ul class="hero__trust">
+          <li><Icon name="check" size={16} /> No factory commissions</li>
+          <li><Icon name="check" size={16} /> Written audit reports</li>
+          <li><Icon name="check" size={16} /> Reply in 1 business day</li>
+        </ul>
+      </div>
+      <div class="hero__form"><QuoteForm /></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section stats-band">
+    <div class="wrap grid grid--4">
+      {stats.map((s) => (
+        <div class="stat">
+          <span class="stat__num" data-target={s.value} data-suffix={s.suffix}>{s.value}{s.suffix}</span>
+          <span class="stat__label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <div class="wrap">
+      <div class="center" style="max-width:60ch">
+        <p class="eyebrow">What we do</p>
+        <h2>Four services that cover the risky parts</h2>
+        <p class="lede center" style="margin-top:var(--s4)">
+          Most sourcing problems happen at three points: choosing the factory, checking the
+          goods, and moving them. We cover all three.
+        </p>
+      </div>
+      <div class="grid grid--4" style="margin-top:var(--s8)">
+        {services.map((s) => (
+          <a class="card card--link svc" href={`/services/${s.slug}/`}>
+            <span class="icon-badge"><Icon name={s.icon} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.short}</p>
+            <span class="svc__more">Learn more <Icon name="arrow" size={15} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section section--soft">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Four steps, and you see the evidence at each one</h2>
+      <div class="grid grid--4" style="margin-top:var(--s7)">
+        {steps.map((s) => (
+          <div class="step">
+            <span class="step__n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section">
+    <div class="wrap why">
+      <div>
+        <p class="eyebrow">Why us</p>
+        <h2>We work for you, not the factory</h2>
+        <p class="lede" style="margin-top:var(--s4)">
+          A lot of "sourcing agents" quietly take a cut from the supplier. That makes them
+          the factory's salesperson, not your buyer. We only take a fee from you — so when a
+          factory is wrong for your order, we can say so.
+        </p>
+        <a href="/about-us/" class="btn btn--ghost" style="margin-top:var(--s5)">
+          More about how we work <Icon name="arrow" size={16} />
+        </a>
+      </div>
+      <div class="grid grid--2">
+        {why.map((w) => (
+          <div class="card">
+            <span class="icon-badge"><Icon name={w.icon} /></span>
+            <h3>{w.title}</h3>
+            <p>{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--soft">
+    <div class="wrap">
+      <p class="eyebrow">Client results</p>
+      <h2>What buyers say</h2>
+      <div class="grid grid--3" style="margin-top:var(--s7)">
+        {testimonials.map((t) => (
+          <figure class="card quote">
+            <blockquote><p>“{t.quote}”</p></blockquote>
+            <figcaption>
+              <strong>{t.name}</strong>
+              <span>{t.role} · {t.place}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap faq-wrap">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2>Straight answers</h2>
+        <p class="lede" style="margin-top:var(--s4)">
+          Anything not covered here, ask us directly — we would rather answer before you buy.
+        </p>
+      </div>
+      <div class="faq">
+        {faq.map((f) => (
+          <details class="faq__item">
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--deep cta">
+    <div class="wrap center" style="max-width:56ch">
+      <h2>Tell us what you are sourcing</h2>
+      <p style="margin-top:var(--s4);font-size:var(--f-md)">
+        Send the product and the destination. You will get realistic pricing, lead times and
+        a recommendation within one business day.
+      </p>
+      <div class="cta__btns">
+        <a href="/contact-us/" class="btn btn--primary">Get a free quote</a>
+        <a href={`https://wa.me/${site.whatsapp}`} class="btn btn--light" target="_blank" rel="noopener noreferrer">
+          Message on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative; overflow: hidden; color: #d5e4ea;
+    background:
+      radial-gradient(ellipse 90% 70% at 85% 15%, rgb(13 138 143 / .28), transparent 50%),
+      radial-gradient(ellipse 60% 50% at 5% 90%, rgb(201 162 39 / .14), transparent 45%),
+      linear-gradient(165deg, #071422 0%, #0c2430 48%, #0a1c28 100%);
+    border-bottom: 1px solid rgb(13 138 143 / .25);
+    padding-block: var(--s8) var(--s9);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+    background-image:
+      repeating-linear-gradient(-18deg, transparent, transparent 38px,
+        rgb(255 255 255 / .03) 38px, rgb(255 255 255 / .03) 39px);
+  }
+  .hero__in { position: relative; display: grid; gap: var(--s8); align-items: start; }
+  @media (min-width: 1000px) { .hero__in { grid-template-columns: 1.15fr .85fr; gap: var(--s9); } }
+  .hero .eyebrow { color: var(--accent); }
+  .hero h1 { color: #fff; }
+  .hero .lede { margin-top: var(--s5); color: #a8c0cb; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s6); }
+  .hero .btn--ghost {
+    border-color: rgb(255 255 255 / .28); color: #fff; background: transparent;
+  }
+  .hero .btn--ghost:hover {
+    border-color: var(--accent); color: #fff; background: rgb(201 162 39 / .12);
+  }
+  .hero__trust { list-style: none; padding: 0; margin-top: var(--s6);
+                 display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5);
+                 font-size: var(--f-sm); color: #8eabb5; }
+  .hero__trust li { display: inline-flex; align-items: center; gap: .45rem; }
+  .hero__trust svg { color: var(--accent); }
+  .hero__form .card {
+    background: #fff; border-color: transparent;
+    box-shadow: 0 20px 50px -16px rgb(0 0 0 / .45);
+  }
+
+  .stats-band {
+    padding-block: var(--s7);
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    border-top: 3px solid var(--sea);
+  }
+  .stat { text-align: center; }
+  .stat__num { display: block; font-size: var(--f-2xl); font-weight: 800;
+               color: var(--ink); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .stat__label { font-size: var(--f-sm); color: var(--muted); }
+
+  .svc { display: flex; flex-direction: column; text-decoration: none; }
+  .svc p { flex: 1; }
+  .svc__more { display: inline-flex; align-items: center; gap: .4rem; margin-top: var(--s4);
+               font-size: var(--f-sm); font-weight: 600; color: var(--sea); }
+  .card--link:hover .svc__more { gap: .7rem; }
+  .svc__more svg { transition: transform .2s var(--ease); }
+
+  .step__n { display: block; font-size: var(--f-xl); font-weight: 800; color: var(--sea);
+             opacity: .35; line-height: 1; margin-bottom: var(--s3); }
+  .step h3 { margin-bottom: var(--s2); }
+  .step p  { font-size: var(--f-sm); }
+
+  .why, .faq-wrap { display: grid; gap: var(--s8); align-items: start; }
+  @media (min-width: 1000px) {
+    .why      { grid-template-columns: .85fr 1.15fr; gap: var(--s9); }
+    .faq-wrap { grid-template-columns: .8fr 1.2fr; gap: var(--s9); }
+  }
+
+  .quote { display: flex; flex-direction: column; gap: var(--s5);
+           border-top: 3px solid var(--accent); }
+  .quote blockquote p { font-size: var(--f-sm); color: var(--ink); }
+  .quote figcaption { display: grid; gap: .15rem; padding-top: var(--s4);
+                      border-top: 1px solid var(--line); }
+  .quote figcaption strong { color: var(--ink); font-size: var(--f-sm); }
+  .quote figcaption span { font-size: var(--f-xs); color: var(--muted); }
+
+  .faq__item { border-bottom: 1px solid var(--line); }
+  .faq__item summary { cursor: pointer; padding: var(--s4) 0; font-weight: 600;
+                       color: var(--ink); font-size: var(--f-sm); list-style: none;
+                       display: flex; justify-content: space-between; gap: var(--s4); }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; font-size: 1.3em; line-height: 1;
+                              color: var(--sea); transition: transform .2s var(--ease); }
+  .faq__item[open] summary::after { transform: rotate(45deg); }
+  .faq__item p { padding-bottom: var(--s4); font-size: var(--f-sm); max-width: 68ch; }
+
+  .cta__btns { display: flex; flex-wrap: wrap; gap: var(--s3);
+               justify-content: center; margin-top: var(--s6); }
+</style>
+
+<script>
+  // Count-up on scroll. Falls back to the static number if IO is unavailable
+  // or the user prefers reduced motion — the real value is already in the HTML.
+  const nums = document.querySelectorAll('.stat__num');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduce && 'IntersectionObserver' in window && nums.length) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const el = entry.target;
+        io.unobserve(el);
+        const target = Number(el.dataset.target);
+        const suffix = el.dataset.suffix ?? '';
+        const start = performance.now();
+        const dur = 1400;
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    nums.forEach((n) => io.observe(n));
+  }
+</script>

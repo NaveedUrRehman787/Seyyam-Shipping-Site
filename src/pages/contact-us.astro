@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site.js';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${site.url}/#organization`,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: site.phone,
+        email: site.email,
+        contactType: 'sales',
+        areaServed: 'PK',
+        availableLanguage: ['English', 'Urdu'],
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: site.chinaPhone,
+        contactType: 'sales',
+        areaServed: 'CN',
+        availableLanguage: ['English', 'Chinese'],
+      },
+    ],
+  },
+};
+---
+<Base title="Contact us" description="Send your product, quantity and destination. We reply with pricing and lead times within one business day." schema={schema}>
+  <section class="section ct-hero">
+    <div class="wrap" style="max-width:62ch">
+      <p class="eyebrow">Contact</p>
+      <h1>Tell us what you are sourcing</h1>
+      <p class="lede" style="margin-top:var(--s5)">
+        The more specific you are — product, quantity, destination country, deadline — the more
+        useful our first reply will be. You will get a confirmation email immediately and a real
+        answer within one business day.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap ct-grid">
+      <div class="ct-info">
+        <h2>Reach us directly</h2>
+        <ul class="contact-list">
+          <li>
+            <Icon name="phone" size={18} />
+            <div>
+              <strong>Pakistan office</strong>
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+            </div>
+          </li>
+          <li>
+            <Icon name="phone" size={18} />
+            <div>
+              <strong>China contact (official)</strong>
+              <a href={`tel:${site.chinaPhoneHref}`}>{site.chinaPhone}</a>
+              <span class="ct-sub">WeChat / WhatsApp available on this number</span>
+            </div>
+          </li>
+          <li>
+            <Icon name="chat" size={18} />
+            <div>
+              <strong>WhatsApp</strong>
+              <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                Pakistan — start a chat
+              </a>
+              <a href={`https://wa.me/${site.chinaWhatsapp}`} target="_blank" rel="noopener noreferrer">
+                China — start a chat
+              </a>
+            </div>
+          </li>
+          <li>
+            <Icon name="mail" size={18} />
+            <div><strong>Email</strong><a href={`mailto:${site.email}`}>{site.email}</a></div>
+          </li>
+          <li>
+            <Icon name="pin" size={18} />
+            <div>
+              <strong>Pakistan office</strong>
+              <span>{site.address}</span>
+            </div>
+          </li>
+          <li>
+            <Icon name="pin" size={18} />
+            <div>
+              <strong>China office (Yiwu)</strong>
+              <span>{site.chinaAddress}</span>
+            </div>
+          </li>
+          <li>
+            <Icon name="clock" size={18} />
+            <div><strong>Hours</strong><span>Mon–Sat, 09:00–18:00 (Pakistan &amp; China time zones)</span></div>
+          </li>
+        </ul>
+
+        <div class="ct-note">
+          <p><strong>Working across time zones?</strong> Say so in your message and we will
+          schedule a call inside your working hours rather than ours.</p>
+        </div>
+      </div>
+
+      <div><QuoteForm title="Send your request" blurb="Every field except phone is required. It takes about a minute." /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ct-hero {
+    background:
+      linear-gradient(180deg, #0c2430 0%, #0a1c28 100%);
+    border-bottom: 1px solid rgb(13 138 143 / .25);
+    color: #a8c0cb;
+  }
+  .ct-hero h1 { color: #fff; }
+  .ct-hero .eyebrow { color: var(--accent); }
+  .ct-hero .lede { color: #a8c0cb; }
+  .ct-grid { display: grid; gap: var(--s8); align-items: start; }
+  @media (min-width: 950px) { .ct-grid { grid-template-columns: .9fr 1.1fr; gap: var(--s9); } }
+  .ct-info h2 { font-size: var(--f-lg); }
+
+  .contact-list { list-style: none; padding: 0; display: grid; gap: var(--s5);
+                  margin-top: var(--s6); }
+  .contact-list li { display: grid; grid-template-columns: 22px 1fr; gap: var(--s4);
+                     align-items: start; }
+  .contact-list svg { margin-top: .3em; color: var(--accent); }
+  .contact-list strong { display: block; font-size: var(--f-xs); text-transform: uppercase;
+                         letter-spacing: .08em; color: var(--muted); margin-bottom: .2rem; }
+  .contact-list a { display: block; color: var(--ink); text-decoration: none; font-weight: 600;
+                    font-size: var(--f-sm); }
+  .contact-list a:hover { color: var(--accent); }
+  .contact-list a + a { margin-top: .25rem; }
+  .contact-list span { display: block; font-size: var(--f-sm); }
+  .ct-sub { margin-top: .15rem; color: var(--muted); font-size: var(--f-xs) !important; font-weight: 400; }
+
+  .ct-note { margin-top: var(--s7); padding: var(--s5); border-radius: var(--radius);
+             background: var(--sea-soft); border-left: 3px solid var(--sea); }
+  .ct-note p { font-size: var(--f-sm); color: var(--ink-2); }
+</style>

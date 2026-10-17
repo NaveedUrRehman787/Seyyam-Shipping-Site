@@ -1,0 +1,25 @@
+---
+import Policy from '../../layouts/Policy.astro';
+import { policies, site } from '../../data/site.js';
+import { policyContent } from '../../data/policy-content.js';
+
+export function getStaticPaths() {
+  return policies.map((p) => ({
+    params: { slug: p.slug },
+    props: { title: p.title, sections: policyContent[p.slug] ?? [] },
+  }));
+}
+
+const { title, sections } = Astro.props;
+---
+<Policy title={title}>
+  {sections.map(([heading, body]) => (
+    <>
+      <h2>{heading}</h2>
+      <p>{body}</p>
+    </>
+  ))}
+  <p style="margin-top:var(--s7);padding:var(--s4);background:var(--bg-soft);border-radius:var(--radius);font-size:var(--f-sm)">
+    Questions about this policy? Email <a href={`mailto:${site.email}`}>{site.email}</a> and we will answer directly.
+  </p>
+</Policy>

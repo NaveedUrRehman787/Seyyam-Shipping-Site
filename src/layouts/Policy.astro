@@ -1,0 +1,14 @@
+---
+import Base from './Base.astro';
+const { title, updated = 'September 2026' } = Astro.props;
+---
+<Base title={title} description={`${title} — how we operate, in plain language.`}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Legal</p>
+      <h1>{title}</h1>
+      <p class="lede" style="margin-top:var(--s3)">Last updated {updated}.</p>
+      <div class="prose" style="margin-top:var(--s7)"><slot /></div>
+    </div>
+  </section>
+</Base>

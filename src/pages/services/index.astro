@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { services, site } from '../../data/site.js';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: services.map((s, i) => ({
+    '@type': 'ListItem', position: i + 1, name: s.title,
+    url: `${site.url}/services/${s.slug}/`,
+  })),
+};
+---
+<Base title="Services" description="Factory audits, pre-shipment quality inspection, and port-to-port or door-to-door freight from China." schema={schema}>
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h1>Cover the three points where sourcing goes wrong</h1>
+      <p class="lede" style="margin-top:var(--s5)">
+        Picking the factory, checking the goods, and moving them. Take one service or all four —
+        most clients start with an audit or an inspection and add freight later.
+      </p>
+
+      <div class="grid grid--2" style="margin-top:var(--s8)">
+        {services.map((s) => (
+          <a class="card card--link svc-lg" href={`/services/${s.slug}/`}>
+            <span class="icon-badge"><Icon name={s.icon} /></span>
+            <h2>{s.title}</h2>
+            <p>{s.intro}</p>
+            <ul class="checklist">
+              {s.deliverables.slice(0, 3).map((d) => <li>{d}</li>)}
+            </ul>
+            <span class="svc__more">See full scope <Icon name="arrow" size={15} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--deep">
+    <div class="wrap center" style="max-width:56ch">
+      <h2>Not sure which one you need?</h2>
+      <p style="margin-top:var(--s4)">
+        Describe the product and where it is going. We will tell you which service actually
+        applies — including if the answer is "none of them yet".
+      </p>
+      <a href="/contact-us/" class="btn btn--primary" style="margin-top:var(--s6)">Ask us</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .svc-lg { display: flex; flex-direction: column; gap: var(--s4); text-decoration: none; }
+  .svc-lg h2 { font-size: var(--f-lg); }
+  .svc-lg p { font-size: var(--f-sm); }
+  .svc__more { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto;
+               padding-top: var(--s3); font-size: var(--f-sm); font-weight: 600; color: var(--sea); }
+  .card--link:hover .svc__more { gap: .7rem; }
+</style>

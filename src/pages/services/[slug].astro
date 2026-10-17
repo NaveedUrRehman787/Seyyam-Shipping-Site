@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Icon from '../../components/Icon.astro';
+import { services, site } from '../../data/site.js';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: service.title,
+      description: service.intro,
+      serviceType: service.title,
+      areaServed: 'Worldwide',
+      provider: { '@id': `${site.url}/#organization` },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: service.faq.map((f) => ({
+        '@type': 'Question', name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: `${site.url}/services/` },
+        { '@type': 'ListItem', position: 3, name: service.title },
+      ],
+    },
+  ],
+};
+---
+<Base title={service.title} description={service.short} schema={schema}>
+  <section class="section svc-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span aria-hidden="true">/</span>
+        <a href="/services/">Services</a> <span aria-hidden="true">/</span>
+        <span aria-current="page">{service.title}</span>
+      </nav>
+      <span class="icon-badge" style="margin-top:var(--s5)"><Icon name={service.icon} /></span>
+      <h1>{service.title}</h1>
+      <p class="lede" style="margin-top:var(--s4)">{service.intro}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap svc-body">
+      <div>
+        <h2>What you get</h2>
+        <ul class="checklist" style="margin-top:var(--s5)">
+          {service.deliverables.map((d) => <li>{d}</li>)}
+        </ul>
+
+        <h2 style="margin-top:var(--s8)">Common questions</h2>
+        <div style="margin-top:var(--s4)">
+          {service.faq.map((f) => (
+            <details class="faq__item">
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+
+        <h2 style="margin-top:var(--s8)">Other services</h2>
+        <div class="grid grid--3" style="margin-top:var(--s5)">
+          {others.map((o) => (
+            <a class="card card--link mini" href={`/services/${o.slug}/`}>
+              <span class="icon-badge"><Icon name={o.icon} size={20} /></span>
+              <h3>{o.title}</h3>
+              <p>{o.short}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <aside class="svc-aside">
+        <QuoteForm title={`Quote: ${service.title}`} blurb="Send the details and we will price it properly, not with a range." />
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .svc-hero { background: var(--bg-soft); border-bottom: 1px solid var(--line);
+              padding-block: var(--s7) var(--s8); }
+  .crumbs { font-size: var(--f-xs); color: var(--muted); display: flex;
+            flex-wrap: wrap; gap: .5rem; }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs a:hover { color: var(--ink); }
+
+  .svc-body { display: grid; gap: var(--s8); align-items: start; }
+  @media (min-width: 1000px) { .svc-body { grid-template-columns: 1.35fr .65fr; gap: var(--s9); } }
+  .svc-aside { position: sticky; top: 100px; }
+  @media (max-width: 999px) { .svc-aside { position: static; } }
+
+  .svc-body h2 { font-size: var(--f-lg); }
+  .mini h3 { font-size: var(--f-base); }
+  .mini p { font-size: var(--f-xs); }
+  .mini { text-decoration: none; padding: var(--s5); }
+
+  .faq__item { border-bottom: 1px solid var(--line); }
+  .faq__item summary { cursor: pointer; padding: var(--s4) 0; font-weight: 600;
+                       color: var(--ink); font-size: var(--f-sm); list-style: none;
+                       display: flex; justify-content: space-between; gap: var(--s4); }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; font-size: 1.3em; line-height: 1;
+                              color: var(--accent); transition: transform .2s var(--ease); }
+  .faq__item[open] summary::after { transform: rotate(45deg); }
+  .faq__item p { padding-bottom: var(--s4); font-size: var(--f-sm); }
+</style>

@@ -1,0 +1,174 @@
+---
+import { site, services } from '../data/site.js';
+const { title = 'Get a Free Quote', blurb = 'Tell us what you need. We reply within one business day.' } = Astro.props;
+---
+<div class="qf card">
+  <h3 class="qf__title">{title}</h3>
+  <p class="qf__blurb">{blurb}</p>
+
+  <form id="quote-form" novalidate>
+    <!-- Honeypot: hidden from humans, irresistible to bots -->
+    <div class="qf__hp" aria-hidden="true">
+      <label for="qf-website">Website</label>
+      <input type="text" id="qf-website" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="qf__row">
+      <div class="field">
+        <label for="qf-name">Name <span aria-hidden="true">*</span></label>
+        <input type="text" id="qf-name" name="name" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="qf-phone">Phone / WhatsApp</label>
+        <input type="tel" id="qf-phone" name="phone" autocomplete="tel" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="qf-email">Email <span aria-hidden="true">*</span></label>
+      <input type="email" id="qf-email" name="email" required autocomplete="email" />
+    </div>
+
+    <div class="field">
+      <label for="qf-service">Service needed</label>
+      <select id="qf-service" name="service">
+        <option value="">Select a service…</option>
+        {services.map((s) => <option value={s.title}>{s.title}</option>)}
+        <option value="Not sure yet">Not sure yet</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="qf-message">What are you sourcing? <span aria-hidden="true">*</span></label>
+      <textarea id="qf-message" name="message" rows="4" required
+        placeholder="Product, target quantity, destination country, and any deadline."></textarea>
+    </div>
+
+    {site.turnstileSiteKey && (
+      <div class="cf-turnstile" data-sitekey={site.turnstileSiteKey} data-theme="light"></div>
+    )}
+
+    <button type="submit" class="btn btn--primary qf__submit">
+      <span class="qf__label">Request a Quote</span>
+      <span class="qf__spinner" aria-hidden="true"></span>
+    </button>
+
+    <p class="qf__note">We never share your details. No spam, ever.</p>
+    <p class="qf__status" id="qf-status" role="status" aria-live="polite"></p>
+  </form>
+</div>
+
+<style>
+  .qf { padding: var(--s6); }
+  .qf__title { margin-bottom: var(--s2); }
+  .qf__blurb { font-size: var(--f-sm); margin-bottom: var(--s5); }
+  .qf__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .qf__row { display: grid; gap: var(--s4); }
+  @media (min-width: 560px) { .qf__row { grid-template-columns: 1fr 1fr; } }
+
+  .field { display: grid; gap: .4rem; margin-bottom: var(--s4); }
+  .field label { font-size: var(--f-xs); font-weight: 600; color: var(--ink); }
+  .field label span { color: var(--accent); }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: var(--f-sm); color: var(--ink);
+    padding: .7rem .85rem; border: 1.5px solid var(--line); border-radius: var(--radius);
+    background: #fff; width: 100%; transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .field :is(input, select, textarea):focus {
+    outline: none; border-color: var(--sea); box-shadow: 0 0 0 3px var(--sea-soft);
+  }
+  .field :is(input, textarea)[aria-invalid='true'] { border-color: var(--accent); }
+  .field .err { font-size: var(--f-xs); color: var(--accent); }
+
+  .qf__submit { width: 100%; justify-content: center; margin-top: var(--s2); }
+  .qf__submit[disabled] { opacity: .65; cursor: not-allowed; }
+  .qf__spinner { display: none; width: 15px; height: 15px; border-radius: 50%;
+                 border: 2px solid rgb(255 255 255 / .35); border-top-color: #fff;
+                 animation: spin .7s linear infinite; }
+  .qf.is-sending .qf__spinner { display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .qf__note { font-size: var(--f-xs); color: var(--muted); text-align: center;
+              margin-top: var(--s3); }
+  .qf__status { font-size: var(--f-sm); margin-top: var(--s3); padding: 0; }
+  .qf__status:not(:empty) { padding: var(--s3) var(--s4); border-radius: var(--radius); }
+  .qf__status.is-ok   { background: var(--sea-soft); color: #0a5c60; }
+  .qf__status.is-fail { background: #fde8e6; color: #9b2c1f; }
+</style>
+
+{site.turnstileSiteKey && (
+  <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js"></script>
+)}
+
+<script define:vars={{ endpoint: site.formEndpoint }}>
+  const form  = document.getElementById('quote-form');
+  const box   = form?.closest('.qf');
+  const status= document.getElementById('qf-status');
+  const btn   = form?.querySelector('.qf__submit');
+  const label = form?.querySelector('.qf__label');
+
+  const setStatus = (msg, ok) => {
+    status.textContent = msg;
+    status.className = 'qf__status ' + (ok ? 'is-ok' : 'is-fail');
+  };
+
+  const showError = (field, msg) => {
+    field.setAttribute('aria-invalid', 'true');
+    let e = field.parentElement.querySelector('.err');
+    if (!e) { e = document.createElement('span'); e.className = 'err'; field.parentElement.append(e); }
+    e.textContent = msg;
+  };
+
+  const clearError = (field) => {
+    field.removeAttribute('aria-invalid');
+    field.parentElement.querySelector('.err')?.remove();
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = ''; status.className = 'qf__status';
+
+    // Client-side validation — the server validates again, this is only for UX
+    const required = [
+      ['name',    'Please enter your name.'],
+      ['email',   'Please enter a valid email address.'],
+      ['message', 'Tell us briefly what you need.'],
+    ];
+    let firstBad = null;
+    for (const [field, msg] of required) {
+      const el = form.elements[field];
+      clearError(el);
+      const bad = field === 'email'
+        ? !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim())
+        : el.value.trim().length < 2;
+      if (bad) { showError(el, msg); firstBad ??= el; }
+    }
+    if (firstBad) { firstBad.focus(); return; }
+
+    btn.disabled = true; box.classList.add('is-sending'); label.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        form.reset();
+        setStatus('Thanks — your request is in. Check your inbox for a confirmation, and we will reply within one business day.', true);
+        window.dataLayer?.push({ event: 'generate_lead', form: 'quote' });
+      } else {
+        setStatus(data.error || 'Something went wrong. Please email us directly.', false);
+      }
+    } catch {
+      setStatus('Network error. Please check your connection or email us directly.', false);
+    } finally {
+      btn.disabled = false; box.classList.remove('is-sending'); label.textContent = 'Request a Quote';
+      if (window.turnstile) window.turnstile.reset();
+    }
+  });
+</script>

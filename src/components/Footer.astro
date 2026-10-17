@@ -1,0 +1,111 @@
+---
+import { site, services, policies } from '../data/site.js';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <div class="ftr__about">
+      <a href="/" class="brand" aria-label={`${site.name} — home`}>
+        <span class="brand__mark" aria-hidden="true">S</span>
+        <span class="brand__text">{site.name}</span>
+      </a>
+      <p>{site.description}</p>
+      <div class="ftr__social">
+        <a href={site.social.linkedin} aria-label="LinkedIn" rel="noopener noreferrer" target="_blank">in</a>
+        <a href={site.social.facebook} aria-label="Facebook" rel="noopener noreferrer" target="_blank">f</a>
+        <a href={site.social.instagram} aria-label="Instagram" rel="noopener noreferrer" target="_blank">ig</a>
+        <a href={site.social.youtube} aria-label="YouTube" rel="noopener noreferrer" target="_blank">yt</a>
+      </div>
+    </div>
+
+    <nav class="ftr__col" aria-label="Services">
+      <h3>Services</h3>
+      <ul>{services.map((s) => <li><a href={`/services/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    </nav>
+
+    <nav class="ftr__col" aria-label="Company">
+      <h3>Company</h3>
+      <ul>
+        <li><a href="/about-us/">About Us</a></li>
+        <li><a href="/services/">All Services</a></li>
+        <li><a href="/contact-us/">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <div class="ftr__col">
+      <h3>Contact</h3>
+      <ul class="ftr__contact">
+        <li><Icon name="phone" size={16} /><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li>
+        <li><Icon name="phone" size={16} /><a href={`tel:${site.chinaPhoneHref}`}>{site.chinaPhone} <span class="ftr__muted">(China)</span></a></li>
+        <li><Icon name="mail" size={16} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><Icon name="pin" size={16} /><span>{site.address}</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap ftr__legal">
+    <ul>{policies.map((p) => <li><a href={`/policies/${p.slug}/`}>{p.title}</a></li>)}</ul>
+    <p>© {year} {site.name}. All rights reserved.</p>
+  </div>
+</footer>
+
+<a class="wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer"
+   aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true">
+    <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7.2 3.9z"/>
+  </svg>
+</a>
+
+<style>
+  .ftr {
+    background:
+      radial-gradient(ellipse 70% 50% at 0% 0%, rgb(13 138 143 / .18), transparent 55%),
+      var(--bg-deep);
+    color: #8eabb5; padding-block: var(--s8) var(--s5);
+    font-size: var(--f-sm); margin-top: auto;
+    border-top: 1px solid rgb(13 138 143 / .3);
+  }
+  .ftr__grid { display: grid; gap: var(--s7); }
+  @media (min-width: 720px)  { .ftr__grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .ftr__grid { grid-template-columns: 2fr 1.2fr 1fr 1.4fr; } }
+
+  .ftr .brand { margin-bottom: var(--s4); }
+  .ftr .brand__text { color: #fff; }
+  .ftr .brand__mark {
+    background: var(--ink); color: var(--accent);
+    box-shadow: inset 0 0 0 1.5px rgb(13 138 143 / .55);
+  }
+  .ftr__about p { max-width: 38ch; }
+
+  .ftr__social { display: flex; gap: var(--s2); margin-top: var(--s4); }
+  .ftr__social a { width: 34px; height: 34px; border-radius: 8px; display: grid;
+                   place-items: center; background: rgb(255 255 255 / .07);
+                   color: #cfdae6; text-decoration: none; font-size: var(--f-xs);
+                   font-weight: 700; transition: background .2s var(--ease), color .2s var(--ease); }
+  .ftr__social a:hover { background: var(--sea); color: #fff; }
+
+  .ftr__col h3 { color: #fff; font-size: var(--f-sm); text-transform: uppercase;
+                 letter-spacing: .1em; margin-bottom: var(--s4); }
+  .ftr__col ul { list-style: none; padding: 0; display: grid; gap: var(--s3); }
+  .ftr__col a { color: #8eabb5; text-decoration: none; }
+  .ftr__col a:hover { color: var(--accent); }
+  .ftr__contact li { display: grid; grid-template-columns: 18px 1fr; gap: var(--s3);
+                     align-items: start; }
+  .ftr__contact svg { margin-top: .25em; color: var(--sea); }
+  .ftr__muted { font-weight: 400; color: #6f8794; font-size: var(--f-xs); }
+
+  .ftr__legal { border-top: 1px solid rgb(255 255 255 / .08); margin-top: var(--s7);
+                padding-top: var(--s5); display: flex; flex-wrap: wrap;
+                justify-content: space-between; gap: var(--s4); font-size: var(--f-xs); }
+  .ftr__legal ul { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4);
+                   list-style: none; padding: 0; }
+  .ftr__legal a { color: #6f8794; text-decoration: none; }
+  .ftr__legal a:hover { color: #fff; }
+
+  .wa { position: fixed; right: 18px; bottom: 18px; z-index: 90;
+        width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+        background: #25d366; color: #fff; box-shadow: var(--shadow-lg);
+        transition: transform .2s var(--ease); }
+  .wa:hover { transform: scale(1.07); color: #fff; }
+</style>

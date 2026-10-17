@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, stats } from '../data/site.js';
+
+const values = [
+  { icon: 'shield', title: 'Paid by you, only', body: 'We take no commission from factories. It is the only structure where telling you a supplier is bad costs us nothing.' },
+  { icon: 'check',  title: 'Evidence over adjectives', body: 'Dated photos, geotagged site visits, defect counts. "Good quality" is not a finding.' },
+  { icon: 'clock',  title: 'Reply within a day', body: 'A working day, not a business week. Sourcing decisions rot when they sit unanswered.' },
+  { icon: 'globe',  title: 'We say no', body: 'If your volume is too low for a category, or the product needs certification you do not have, we tell you before you spend.' },
+];
+---
+<Base title="About us" description="An independent China sourcing team paid by buyers, not factories. Audits, inspections and freight backed by written evidence.">
+  <section class="section abt-hero">
+    <div class="wrap" style="max-width:70ch">
+      <p class="eyebrow">About us</p>
+      <h1>We are the buyer's side of the table</h1>
+      <p class="lede" style="margin-top:var(--s5)">
+        {site.legalName} is a Karachi-based shipping and sourcing company built by people who
+        had spent years watching importers get burned by the same three things: a factory that
+        was not what it claimed, goods nobody checked, and freight that arrived with a surprise
+        invoice. Our China desk in Yiwu keeps us on the ground where the orders are made.
+      </p>
+    </div>
+  </section>
+
+  <section class="section stats-band">
+    <div class="wrap grid grid--4">
+      {stats.map((s) => (
+        <div class="stat">
+          <span class="stat__num">{s.value.toLocaleString()}{s.suffix}</span>
+          <span class="stat__label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2>Most sourcing agents are paid by the factory</h2>
+        <p style="margin-top:var(--s4)">
+          It is the standard arrangement in this industry and it is rarely disclosed. The agent
+          earns a percentage from the supplier, which means the agent's income depends on you
+          placing the order — with that supplier, at that price, regardless of whether it is
+          the right call.
+        </p>
+        <p style="margin-top:var(--s4)">
+          It also means the agent is structurally unable to fail a factory audit. Failing the
+          audit costs them the commission.
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow">How we are different</p>
+        <h2>You pay us, so we can tell you the truth</h2>
+        <p style="margin-top:var(--s4)">
+          Our fee comes from the buyer and only from the buyer. When we audit a factory and it
+          fails, we lose nothing by saying so — and you avoid a deposit you were about to lose.
+        </p>
+        <p style="margin-top:var(--s4)">
+          It is a less profitable model per order. It is the reason clients come back for the
+          second one.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <p class="eyebrow">How we work</p>
+      <h2>Four things we hold ourselves to</h2>
+      <div class="grid grid--4" style="margin-top:var(--s7)">
+        {values.map((v) => (
+          <div class="card">
+            <span class="icon-badge"><Icon name={v.icon} /></span>
+            <h3>{v.title}</h3>
+            <p>{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Where we are</p>
+        <h2>Karachi HQ, China on the ground</h2>
+        <p style="margin-top:var(--s4)">
+          Our Pakistan office is in Keamari, Karachi — close to the port. Our official China
+          contact sits in Yiwu, with inspectors covering the major manufacturing clusters —
+          Guangdong, Zhejiang, Jiangsu, Fujian, Shandong, and Yiwu for small goods.
+        </p>
+        <p style="margin-top:var(--s4)">
+          Being physically present is the entire point. A remote "audit" done over video call
+          is worth roughly what it costs.
+        </p>
+        <ul class="checklist" style="margin-top:var(--s5)">
+          <li>Pakistan office for local coordination and freight</li>
+          <li>Most factories reachable within 48 hours from our China desk</li>
+          <li>Reports written in English, in plain language</li>
+        </ul>
+      </div>
+      <div class="card contact-card">
+        <h3>Talk to a person</h3>
+        <ul class="ftr__contact contact-list">
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li>
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.chinaPhoneHref}`}>{site.chinaPhone} (China)</a></li>
+          <li><Icon name="mail" size={18} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><Icon name="pin" size={18} /><span>{site.address}</span></li>
+        </ul>
+        <a href="/contact-us/" class="btn btn--primary" style="margin-top:var(--s5);width:100%;justify-content:center">
+          Send us a request
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .abt-hero {
+    background:
+      radial-gradient(ellipse 80% 60% at 90% 0%, rgb(13 138 143 / .25), transparent 50%),
+      linear-gradient(165deg, #071422 0%, #0c2430 100%);
+    border-bottom: 1px solid rgb(13 138 143 / .25);
+    color: #a8c0cb;
+  }
+  .abt-hero h1 { color: #fff; }
+  .abt-hero .eyebrow { color: var(--accent); }
+  .abt-hero .lede { color: #a8c0cb; }
+  .stats-band {
+    padding-block: var(--s7); border-bottom: 1px solid var(--line);
+    background: #fff; border-top: 3px solid var(--sea);
+  }
+  .stat { text-align: center; }
+  .stat__num { display: block; font-size: var(--f-2xl); font-weight: 800; color: var(--ink);
+               letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .stat__label { font-size: var(--f-sm); color: var(--muted); }
+
+  .split { display: grid; gap: var(--s8); align-items: start; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: var(--s9); } }
+  .split h2 { font-size: var(--f-lg); }
+  .split p { font-size: var(--f-sm); }
+
+  .contact-list { list-style: none; padding: 0; display: grid; gap: var(--s4);
+                  margin-top: var(--s5); }
+  .contact-list li { display: grid; grid-template-columns: 20px 1fr; gap: var(--s3);
+                     align-items: start; font-size: var(--f-sm); }
+  .contact-list svg { margin-top: .2em; color: var(--accent); }
+  .contact-list a { color: var(--ink); text-decoration: none; font-weight: 600; }
+</style>

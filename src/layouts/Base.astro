@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site.js';
+
+const {
+  title,
+  description = site.description,
+  image = '/og-default.jpg',
+  noindex = false,
+  schema = null,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage   = new URL(image, site.url).href;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.legalName,
+  url: site.url,
+  description: site.description,
+  telephone: site.phone,
+  email: site.email,
+  foundingDate: site.founded,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Nageena Center, Office No 6-B, Keamari',
+    addressLocality: site.addressLocality,
+    addressRegion: site.addressRegion,
+    addressCountry: site.addressCountry,
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: site.phone,
+      email: site.email,
+      contactType: 'customer service',
+      areaServed: 'PK',
+      availableLanguage: ['English', 'Urdu'],
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: site.chinaPhone,
+      contactType: 'customer service',
+      areaServed: 'CN',
+      availableLanguage: ['English', 'Chinese'],
+    },
+  ],
+  sameAs: Object.values(site.social),
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="preload" href="/fonts/outfit-var.woff2" as="font" type="font/woff2" crossorigin />
+
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+  <slot name="head" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <Header />
+  <main id="main"><slot /></main>
+  <Footer />
+</body>
+</html>
+
+<style is:global>
+  body { display: flex; flex-direction: column; min-height: 100dvh; }
+  main { flex: 1; }
+</style>

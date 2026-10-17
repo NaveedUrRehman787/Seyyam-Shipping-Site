@@ -1,0 +1,25 @@
+{
+  "name": "sourcing-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static China-sourcing lead-gen site. Astro build + Node mail API.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "api": "node api/server.js",
+    "api:dev": "node --watch api/server.js",
+    "test": "node test/smoke.mjs && node test/e2e.mjs",
+    "test:mail": "node test/smoke.mjs",
+    "test:e2e": "node test/e2e.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.3",
+    "sharp": "^0.34.1"
+  }
+}
