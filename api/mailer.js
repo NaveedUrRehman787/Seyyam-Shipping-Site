@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 const BRAND = {
   name: 'Nova Source',
   site: 'https://seyyam-shipping-site.vercel.app',
-  phone: '+92 312 9295384',
+  phone: '+86 131 5790 8374',
   accent: '#c9a227',
   ink: '#071422',
 };

@@ -2,6 +2,21 @@
 
 export const offices = [
   {
+    id: 'yiwu',
+    label: 'Yiwu, China',
+    country: 'China',
+    flag: 'CN',
+    address:
+      'Room 609-2, 6th Floor, Building 5, No. 368 Xiufa Avenue, Choujiang Street, Yiwu City, Zhejiang, China',
+    phone: '+86 131 5790 8374',
+    phoneHref: '+8613157908374',
+    whatsapp: '8613157908374',
+    altPhone: '+86 130 1371 1932',
+    altPhoneHref: '+8613013711932',
+    legalAddress: 'NO.188, Shangcheng Avenue, Yiwu, Zhejiang Province, China',
+    primary: true,
+  },
+  {
     id: 'islamabad',
     label: 'Islamabad, Pakistan',
     country: 'Pakistan',
@@ -10,7 +25,6 @@ export const offices = [
     phone: '+92 312 9295384',
     phoneHref: '+923129295384',
     whatsapp: '923129295384',
-    primary: true,
   },
   {
     id: 'kabul-nader',
@@ -52,24 +66,11 @@ export const offices = [
     phoneHref: '+971503040084',
     whatsapp: '971503040084',
   },
-  {
-    id: 'yiwu',
-    label: 'Yiwu, China',
-    country: 'China',
-    flag: 'CN',
-    address:
-      'Room 609-2, 6th Floor, Building 5, No. 368 Xiufa Avenue, Choujiang Street, Yiwu City, Zhejiang, China',
-    phone: '+86 131 5790 8374',
-    phoneHref: '+8613157908374',
-    whatsapp: '8613157908374',
-    altPhone: '+86 130 1371 1932',
-    altPhoneHref: '+8613013711932',
-    legalAddress: 'NO.188, Shangcheng Avenue, Yiwu, Zhejiang Province, China',
-  },
 ];
 
 const primaryOffice = offices.find((o) => o.primary) ?? offices[0];
 const chinaOffice = offices.find((o) => o.id === 'yiwu');
+const islamabadOffice = offices.find((o) => o.id === 'islamabad');
 const kabulPrimary = offices.find((o) => o.id === 'kabul-nader');
 const dubaiOffice = offices.find((o) => o.id === 'dubai');
 
@@ -81,20 +82,22 @@ export const site = {
   url: 'https://seyyam-shipping-site.vercel.app',
   description:
     'Nova Source helps businesses source from China with verified suppliers, factory audits, pre-shipment quality inspection and reliable freight — with offices in China, Afghanistan, UAE and Pakistan.',
-  // Primary contact (Islamabad — WhatsApp & call)
+  // Main business number (China) — topbar, WhatsApp float, primary CTA
   phone: primaryOffice.phone,
   phoneHref: primaryOffice.phoneHref,
   whatsapp: primaryOffice.whatsapp,
   email: 'novasource72@gmail.com',
   address: primaryOffice.address,
-  addressLocality: 'Islamabad',
-  addressRegion: 'Islamabad Capital Territory',
-  addressCountry: 'PK',
+  addressLocality: 'Yiwu',
+  addressRegion: 'Zhejiang',
+  addressCountry: 'CN',
   // Shortcuts used in footer / about
   chinaPhone: chinaOffice.phone,
   chinaPhoneHref: chinaOffice.phoneHref,
   chinaWhatsapp: chinaOffice.whatsapp,
   chinaAddress: chinaOffice.address,
+  islamabadPhone: islamabadOffice.phone,
+  islamabadPhoneHref: islamabadOffice.phoneHref,
   kabulPhone: kabulPrimary.phone,
   kabulPhoneHref: kabulPrimary.phoneHref,
   dubaiPhone: dubaiOffice.phone,

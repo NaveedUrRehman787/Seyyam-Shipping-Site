@@ -8,7 +8,9 @@ const isActive = (href) => href === '/' ? path === '/' : path.startsWith(href);
   <div class="wrap topbar__in">
     <span>{site.tagline}</span>
     <a href={`tel:${site.phoneHref}`} class="topbar__tel">
-      <Icon name="phone" size={14} /> {site.phone}
+      <Icon name="phone" size={14} />
+      <span class="topbar__label">Main</span>
+      {site.phone}
     </a>
   </div>
 </div>
@@ -56,9 +58,13 @@ const isActive = (href) => href === '/' ? path === '/' : path.startsWith(href);
   }
   .topbar__in { display: flex; justify-content: space-between; align-items: center;
                 gap: var(--s4); min-height: 38px; }
-  .topbar__tel { display: inline-flex; align-items: center; gap: .4rem;
+  .topbar__tel { display: inline-flex; align-items: center; gap: .45rem;
                  color: var(--accent); text-decoration: none; font-weight: 650; }
   .topbar__tel:hover { color: #e0c04a; }
+  .topbar__label {
+    font-size: .65rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: #071422; background: var(--accent); padding: .15rem .4rem; border-radius: 3px;
+  }
   @media (max-width: 640px) { .topbar__in > span { display: none; }
                               .topbar__in { justify-content: flex-end; } }
 

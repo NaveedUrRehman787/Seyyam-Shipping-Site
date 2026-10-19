@@ -43,7 +43,7 @@ const schema = {
             <li class:list={[{ 'is-primary': o.primary }]}>
               <div class="office-list__head">
                 <strong>{o.label}</strong>
-                {o.primary && <span class="badge">Primary · WhatsApp &amp; call</span>}
+                {o.primary && <span class="badge">Main business number</span>}
               </div>
               <span class="office-list__addr">{o.address}</span>
               <a href={`tel:${o.phoneHref}`}>{o.phone}</a>
