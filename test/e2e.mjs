@@ -8,8 +8,8 @@ const env = {
   ...process.env,
   SMTP_HOST: acct.smtp.host, SMTP_PORT: String(acct.smtp.port),
   SMTP_USER: acct.user, SMTP_PASS: acct.pass,
-  INBOX: 'md@seyyamshippingline.com',
-  ALLOWED_ORIGIN: 'https://seyyamshippingline.com',
+  INBOX: 'novasource72@gmail.com',
+  ALLOWED_ORIGIN: 'https://seyyam-shipping-site.vercel.app',
   PORT: '4321',
 };
 delete env.TURNSTILE_SECRET;
@@ -43,7 +43,7 @@ const res = await post({
 const body = await res.json();
 check('POST /api/send accepts a valid lead', res.status === 200 && body.ok === true, `→ ${res.status}`);
 check('CORS origin is locked to the site',
-  res.headers.get('access-control-allow-origin') === 'https://seyyamshippingline.com',
+  res.headers.get('access-control-allow-origin') === 'https://seyyam-shipping-site.vercel.app',
   `→ ${res.headers.get('access-control-allow-origin')}`);
 
 const bad = await post({ name: 'X', email: 'nope', message: '' });

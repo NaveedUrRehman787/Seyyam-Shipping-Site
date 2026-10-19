@@ -6,7 +6,7 @@ process.env.SMTP_HOST = acct.smtp.host;
 process.env.SMTP_PORT = String(acct.smtp.port);
 process.env.SMTP_USER = acct.user;
 process.env.SMTP_PASS = acct.pass;
-process.env.INBOX     = 'md@seyyamshippingline.com';
+process.env.INBOX     = 'novasource72@gmail.com';
 delete process.env.TURNSTILE_SECRET;   // captcha disabled for this run
 console.log(`SMTP: ${acct.smtp.host}:${acct.smtp.port} as ${acct.user}\n`);
 

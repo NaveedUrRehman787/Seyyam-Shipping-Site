@@ -49,11 +49,11 @@ with schema — no other file to touch.
 ```
 SMTP_HOST=smtp.hostinger.com
 SMTP_PORT=465                       # 465 implicit TLS, or 587 STARTTLS
-SMTP_USER=md@seyyamshippingline.com # a real mailbox, created in hPanel
+SMTP_USER=novasource72@gmail.com    # a real mailbox
 SMTP_PASS=...
-INBOX=md@seyyamshippingline.com     # where leads land
+INBOX=novasource72@gmail.com        # where leads land
 TURNSTILE_SECRET=                   # optional; blank disables the captcha
-ALLOWED_ORIGIN=https://seyyamshippingline.com
+ALLOWED_ORIGIN=https://seyyam-shipping-site.vercel.app
 PORT=3000
 ```
 
@@ -78,7 +78,7 @@ Put it on a free serverless tier instead:
    ```js
    formEndpoint: 'https://your-api.vercel.app/api/send',
    ```
-6. Set `ALLOWED_ORIGIN=https://seyyamshippingline.com` so only your site can post
+6. Set `ALLOWED_ORIGIN=https://seyyam-shipping-site.vercel.app` so only your site can post
 7. Rebuild and re-upload
 
 ### Option B — Hostinger VPS, one process

@@ -18,7 +18,7 @@ export const policyContent = {
     ['Our role', 'We act as your agent for sourcing, inspection and freight coordination. We are not the manufacturer and do not take title to your goods unless expressly agreed in writing.'],
     ['Your responsibilities', 'You are responsible for the accuracy of specifications you supply, for ensuring the goods are legal to import into your destination country, and for obtaining any certification your market requires.'],
     ['Limitation of liability', 'Our liability in connection with any engagement is limited to the fees you paid us for that engagement. We are not liable for indirect or consequential loss, including lost profit or lost sales opportunity.'],
-    ['Governing law', 'These terms are governed by the laws of the Islamic Republic of Pakistan. Disputes are subject to the courts of Karachi, Sindh, unless otherwise agreed in writing.'],
+    ['Governing law', 'These terms are governed by the laws of the People\'s Republic of China. Disputes are subject to the courts of Zhejiang Province unless otherwise agreed in writing.'],
   ],
   'payment-policy': [
     ['Currencies and methods', 'We invoice in USD by default; EUR and GBP are available on request. Payment is by bank transfer (T/T). Bank charges are borne by the sender.'],

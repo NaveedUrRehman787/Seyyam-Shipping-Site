@@ -28,10 +28,10 @@ const orgSchema = {
   foundingDate: site.founded,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Nageena Center, Office No 6-B, Keamari',
-    addressLocality: site.addressLocality,
-    addressRegion: site.addressRegion,
-    addressCountry: site.addressCountry,
+    streetAddress: 'NO.188, Shangcheng Avenue',
+    addressLocality: 'Yiwu',
+    addressRegion: 'Zhejiang',
+    addressCountry: 'CN',
   },
   contactPoint: [
     {
@@ -48,6 +48,20 @@ const orgSchema = {
       contactType: 'customer service',
       areaServed: 'CN',
       availableLanguage: ['English', 'Chinese'],
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: site.kabulPhone,
+      contactType: 'customer service',
+      areaServed: 'AF',
+      availableLanguage: ['English', 'Pashto', 'Dari'],
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: site.dubaiPhone,
+      contactType: 'customer service',
+      areaServed: 'AE',
+      availableLanguage: ['English'],
     },
   ],
   sameAs: Object.values(site.social),

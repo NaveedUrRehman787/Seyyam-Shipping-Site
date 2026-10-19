@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     console.error('[send] failed:', err);
     return res.status(500).json({
       ok: false,
-      error: 'We could not send your message. Please email md@seyyamshippingline.com directly.',
+      error: 'We could not send your message. Please email novasource72@gmail.com directly.',
     });
   }
 }

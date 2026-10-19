@@ -16,10 +16,11 @@ const values = [
       <p class="eyebrow">About us</p>
       <h1>We are the buyer's side of the table</h1>
       <p class="lede" style="margin-top:var(--s5)">
-        {site.legalName} is a Karachi-based shipping and sourcing company built by people who
+        {site.name} ({site.legalName}) is your trusted partner from China to Afghanistan —
+        with desks in Yiwu, Kabul, Jalalabad, Dubai and Islamabad. We were built by people who
         had spent years watching importers get burned by the same three things: a factory that
         was not what it claimed, goods nobody checked, and freight that arrived with a surprise
-        invoice. Our China desk in Yiwu keeps us on the ground where the orders are made.
+        invoice.
       </p>
     </div>
   </section>
@@ -86,18 +87,18 @@ const values = [
     <div class="wrap split">
       <div>
         <p class="eyebrow">Where we are</p>
-        <h2>Karachi HQ, China on the ground</h2>
+        <h2>China, Afghanistan, UAE &amp; Pakistan</h2>
         <p style="margin-top:var(--s4)">
-          Our Pakistan office is in Keamari, Karachi — close to the port. Our official China
-          contact sits in Yiwu, with inspectors covering the major manufacturing clusters —
-          Guangdong, Zhejiang, Jiangsu, Fujian, Shandong, and Yiwu for small goods.
+          Our China desk sits in Yiwu, with inspectors covering the major manufacturing
+          clusters — Guangdong, Zhejiang, Jiangsu, Fujian, Shandong. Regional offices in
+          Kabul, Jalalabad, Dubai and Islamabad keep freight and buyer support local.
         </p>
         <p style="margin-top:var(--s4)">
           Being physically present is the entire point. A remote "audit" done over video call
           is worth roughly what it costs.
         </p>
         <ul class="checklist" style="margin-top:var(--s5)">
-          <li>Pakistan office for local coordination and freight</li>
+          <li>Islamabad WhatsApp &amp; call for Pakistan coordination</li>
           <li>Most factories reachable within 48 hours from our China desk</li>
           <li>Reports written in English, in plain language</li>
         </ul>
@@ -105,10 +106,11 @@ const values = [
       <div class="card contact-card">
         <h3>Talk to a person</h3>
         <ul class="ftr__contact contact-list">
-          <li><Icon name="phone" size={18} /><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li>
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.phoneHref}`}>{site.phone} (Islamabad)</a></li>
           <li><Icon name="phone" size={18} /><a href={`tel:${site.chinaPhoneHref}`}>{site.chinaPhone} (China)</a></li>
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.kabulPhoneHref}`}>{site.kabulPhone} (Kabul)</a></li>
+          <li><Icon name="phone" size={18} /><a href={`tel:${site.dubaiPhoneHref}`}>{site.dubaiPhone} (Dubai)</a></li>
           <li><Icon name="mail" size={18} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
-          <li><Icon name="pin" size={18} /><span>{site.address}</span></li>
         </ul>
         <a href="/contact-us/" class="btn btn--primary" style="margin-top:var(--s5);width:100%;justify-content:center">
           Send us a request

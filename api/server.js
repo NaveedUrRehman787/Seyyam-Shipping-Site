@@ -30,7 +30,7 @@ app.post('/api/send', async (req, res) => {
     console.error('[send] failed:', err);
     res.status(500).json({
       ok: false,
-      error: 'We could not send your message. Please email md@seyyamshippingline.com directly.',
+      error: 'We could not send your message. Please email novasource72@gmail.com directly.',
     });
   }
 });

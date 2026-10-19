@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://seyyamshippingline.com',
+  site: 'https://seyyam-shipping-site.vercel.app',
   output: 'static',
   trailingSlash: 'always',
   integrations: [sitemap()],

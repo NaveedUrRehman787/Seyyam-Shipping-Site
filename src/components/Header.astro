@@ -16,7 +16,7 @@ const isActive = (href) => href === '/' ? path === '/' : path.startsWith(href);
 <header class="hdr" id="hdr">
   <div class="wrap hdr__in">
     <a href="/" class="brand" aria-label={`${site.name} — home`}>
-        <span class="brand__mark" aria-hidden="true">S</span>
+        <span class="brand__mark" aria-hidden="true">{site.brandMark}</span>
       <span class="brand__text">{site.name}</span>
     </a>
 

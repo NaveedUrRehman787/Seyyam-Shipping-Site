@@ -2,5 +2,5 @@
   <rect width="64" height="64" rx="12" fill="#071422"/>
   <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="#0d8a8f" stroke-width="2"/>
   <text x="32" y="44" font-family="system-ui,-apple-system,Segoe UI,sans-serif"
-        font-size="34" font-weight="800" fill="#c9a227" text-anchor="middle">S</text>
+        font-size="34" font-weight="800" fill="#c9a227" text-anchor="middle">N</text>
 </svg>

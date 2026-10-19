@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
   <div class="wrap ftr__grid">
     <div class="ftr__about">
       <a href="/" class="brand" aria-label={`${site.name} — home`}>
-        <span class="brand__mark" aria-hidden="true">S</span>
+        <span class="brand__mark" aria-hidden="true">{site.brandMark}</span>
         <span class="brand__text">{site.name}</span>
       </a>
       <p>{site.description}</p>
@@ -36,10 +36,11 @@ const year = new Date().getFullYear();
     <div class="ftr__col">
       <h3>Contact</h3>
       <ul class="ftr__contact">
-        <li><Icon name="phone" size={16} /><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li>
+        <li><Icon name="phone" size={16} /><a href={`tel:${site.phoneHref}`}>{site.phone} <span class="ftr__muted">(Islamabad)</span></a></li>
         <li><Icon name="phone" size={16} /><a href={`tel:${site.chinaPhoneHref}`}>{site.chinaPhone} <span class="ftr__muted">(China)</span></a></li>
+        <li><Icon name="phone" size={16} /><a href={`tel:${site.kabulPhoneHref}`}>{site.kabulPhone} <span class="ftr__muted">(Kabul)</span></a></li>
+        <li><Icon name="phone" size={16} /><a href={`tel:${site.dubaiPhoneHref}`}>{site.dubaiPhone} <span class="ftr__muted">(Dubai)</span></a></li>
         <li><Icon name="mail" size={16} /><a href={`mailto:${site.email}`}>{site.email}</a></li>
-        <li><Icon name="pin" size={16} /><span>{site.address}</span></li>
       </ul>
     </div>
   </div>

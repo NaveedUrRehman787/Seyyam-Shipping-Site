@@ -24,7 +24,7 @@ spawn('node', ['api/server.js'], {
     SMTP_PORT: String(acct.smtp.port),
     SMTP_USER: acct.user,
     SMTP_PASS: acct.pass,
-    INBOX: 'md@seyyamshippingline.com',
+    INBOX: 'novasource72@gmail.com',
     ALLOWED_ORIGIN: 'http://localhost:3000',
     PORT: '3000',
     TURNSTILE_SECRET: '',
