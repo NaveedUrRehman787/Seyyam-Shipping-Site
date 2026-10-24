@@ -1,107 +1,22 @@
 // Single source of truth. Change it here, it changes everywhere.
 
-export const offices = [
-  {
-    id: 'yiwu',
-    label: 'Yiwu, China',
-    country: 'China',
-    flag: 'CN',
-    address:
-      'Room 609-2, 6th Floor, Building 5, No. 368 Xiufa Avenue, Choujiang Street, Yiwu City, Zhejiang, China',
-    phone: '+86 131 5790 8374',
-    phoneHref: '+8613157908374',
-    whatsapp: '8613157908374',
-    altPhone: '+86 130 1371 1932',
-    altPhoneHref: '+8613013711932',
-    legalAddress: 'NO.188, Shangcheng Avenue, Yiwu, Zhejiang Province, China',
-    primary: true,
-  },
-  {
-    id: 'islamabad',
-    label: 'Islamabad, Pakistan',
-    country: 'Pakistan',
-    flag: 'PK',
-    address: 'Islamabad, Pakistan',
-    phone: '+92 312 9295384',
-    phoneHref: '+923129295384',
-    whatsapp: '923129295384',
-  },
-  {
-    id: 'kabul-nader',
-    label: 'Kabul — Allah Nazar Market',
-    country: 'Afghanistan',
-    flag: 'AF',
-    address: 'Jadeh Nader Pashtoon, Allah Nazar Market, Kholoum Floor, Kabul, Afghanistan',
-    phone: '+93 765 858789',
-    phoneHref: '+93765858789',
-    whatsapp: '93765858789',
-  },
-  {
-    id: 'kabul-business',
-    label: 'Kabul — Business Center',
-    country: 'Afghanistan',
-    flag: 'AF',
-    address: 'Shahr-e-Naw, Haji Yaqub Square, Kabul Business Center, Kabul, Afghanistan',
-    phone: '+93 767 301261',
-    phoneHref: '+93767301261',
-    whatsapp: '93767301261',
-  },
-  {
-    id: 'jalalabad',
-    label: 'Jalalabad, Afghanistan',
-    country: 'Afghanistan',
-    flag: 'AF',
-    address: 'Mia Aslam Plaza, Jalalabad, Afghanistan',
-    phone: '+93 781 853030',
-    phoneHref: '+93781853030',
-    whatsapp: '93781853030',
-  },
-  {
-    id: 'dubai',
-    label: 'Dubai, UAE',
-    country: 'United Arab Emirates',
-    flag: 'AE',
-    address: 'JNP Signal, behind Fazal Afghan Restaurant, Dubai, UAE',
-    phone: '+971 50 304 0084',
-    phoneHref: '+971503040084',
-    whatsapp: '971503040084',
-  },
-];
-
-const primaryOffice = offices.find((o) => o.primary) ?? offices[0];
-const chinaOffice = offices.find((o) => o.id === 'yiwu');
-const islamabadOffice = offices.find((o) => o.id === 'islamabad');
-const kabulPrimary = offices.find((o) => o.id === 'kabul-nader');
-const dubaiOffice = offices.find((o) => o.id === 'dubai');
-
 export const site = {
-  name: 'Nova Source',
-  legalName: 'YIWU NOVASOURCE IMPORT AND EXPORT CO.,LTD',
+  name: 'YIWU NOVASOURE IMPORT AND EXPORT CO.,LTD',
+  legalName: 'YIWU NOVASOURE IMPORT AND EXPORT CO.,LTD',
   brandMark: 'N',
-  tagline: 'Your Trusted Partner from China to Afghanistan',
+  tagline: 'Trusted China Sourcing & Reliable Global Shipping',
   url: 'https://seyyam-shipping-site.vercel.app',
   description:
-    'Nova Source helps businesses source from China with verified suppliers, factory audits, pre-shipment quality inspection and reliable freight — with offices in China, Afghanistan, UAE and Pakistan.',
-  // Main business number (China) — topbar, WhatsApp float, primary CTA
-  phone: primaryOffice.phone,
-  phoneHref: primaryOffice.phoneHref,
-  whatsapp: primaryOffice.whatsapp,
+    'YIWU NOVASOURE IMPORT AND EXPORT CO.,LTD helps businesses source from China with verified suppliers, factory audits, pre-shipment quality inspection and reliable freight — based in Yiwu, China.',
+  phone: '+86 131 5790 8374',
+  phoneHref: '+8613157908374',
+  whatsapp: '8613157908374',
   email: 'novasource72@gmail.com',
-  address: primaryOffice.address,
+  address:
+    'Room 609-2, 6th Floor, Building 5, No. 368 Xiufa Avenue, Choujiang Street, Yiwu City, Zhejiang, China',
   addressLocality: 'Yiwu',
   addressRegion: 'Zhejiang',
   addressCountry: 'CN',
-  // Shortcuts used in footer / about
-  chinaPhone: chinaOffice.phone,
-  chinaPhoneHref: chinaOffice.phoneHref,
-  chinaWhatsapp: chinaOffice.whatsapp,
-  chinaAddress: chinaOffice.address,
-  islamabadPhone: islamabadOffice.phone,
-  islamabadPhoneHref: islamabadOffice.phoneHref,
-  kabulPhone: kabulPrimary.phone,
-  kabulPhoneHref: kabulPrimary.phoneHref,
-  dubaiPhone: dubaiOffice.phone,
-  dubaiPhoneHref: dubaiOffice.phoneHref,
   founded: '2018',
   social: {
     facebook: 'https://facebook.com/',

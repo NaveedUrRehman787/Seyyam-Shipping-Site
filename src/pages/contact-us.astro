@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import Icon from '../components/Icon.astro';
-import { site, offices } from '../data/site.js';
+import { site } from '../data/site.js';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -10,18 +10,18 @@ const schema = {
   mainEntity: {
     '@type': 'Organization',
     '@id': `${site.url}/#organization`,
-    contactPoint: offices.map((o) => ({
+    contactPoint: {
       '@type': 'ContactPoint',
-      telephone: o.phone,
+      telephone: site.phone,
+      email: site.email,
       contactType: 'sales',
-      areaServed: o.flag,
-      availableLanguage: ['English'],
-      name: o.label,
-    })),
+      areaServed: 'CN',
+      availableLanguage: ['English', 'Chinese'],
+    },
   },
 };
 ---
-<Base title="Contact us" description="Reach Nova Source in Islamabad, Kabul, Jalalabad, Dubai or Yiwu. Send your product and destination — we reply within one business day." schema={schema}>
+<Base title="Contact us" description="Contact YIWU NOVASOURE in Yiwu, China. Send your product and destination — we reply within one business day." schema={schema}>
   <section class="section ct-hero">
     <div class="wrap" style="max-width:62ch">
       <p class="eyebrow">Contact</p>
@@ -37,36 +37,38 @@ const schema = {
   <section class="section">
     <div class="wrap ct-grid">
       <div class="ct-info">
-        <h2>Our offices</h2>
-        <ul class="office-list">
-          {offices.map((o) => (
-            <li class:list={[{ 'is-primary': o.primary }]}>
-              <div class="office-list__head">
-                <strong>{o.label}</strong>
-                {o.primary && <span class="badge">Main business number</span>}
-              </div>
-              <span class="office-list__addr">{o.address}</span>
-              <a href={`tel:${o.phoneHref}`}>{o.phone}</a>
-              {o.altPhone && (
-                <a href={`tel:${o.altPhoneHref}`}>{o.altPhone} <span class="ct-sub-inline">(alt)</span></a>
-              )}
-              {o.whatsapp && (
-                <a class="wa-link" href={`https://wa.me/${o.whatsapp}`} target="_blank" rel="noopener noreferrer">
-                  WhatsApp
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        <ul class="contact-list" style="margin-top:var(--s7)">
+        <h2>Reach us in China</h2>
+        <ul class="contact-list">
+          <li>
+            <Icon name="phone" size={18} />
+            <div>
+              <strong>Phone / WeChat / WhatsApp</strong>
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+            </div>
+          </li>
+          <li>
+            <Icon name="chat" size={18} />
+            <div>
+              <strong>WhatsApp</strong>
+              <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">
+                Start a chat
+              </a>
+            </div>
+          </li>
           <li>
             <Icon name="mail" size={18} />
             <div><strong>Email</strong><a href={`mailto:${site.email}`}>{site.email}</a></div>
           </li>
           <li>
+            <Icon name="pin" size={18} />
+            <div>
+              <strong>Office — Yiwu, China</strong>
+              <span>{site.address}</span>
+            </div>
+          </li>
+          <li>
             <Icon name="clock" size={18} />
-            <div><strong>Hours</strong><span>Mon–Sat, 09:00–18:00 (local office time)</span></div>
+            <div><strong>Hours</strong><span>Mon–Sat, 09:00–18:00 China Standard Time (UTC+8)</span></div>
           </li>
         </ul>
 
@@ -95,31 +97,8 @@ const schema = {
   @media (min-width: 950px) { .ct-grid { grid-template-columns: .9fr 1.1fr; gap: var(--s9); } }
   .ct-info h2 { font-size: var(--f-lg); }
 
-  .office-list { list-style: none; padding: 0; display: grid; gap: var(--s4);
-                 margin-top: var(--s6); }
-  .office-list li {
-    padding: var(--s4); border: 1px solid var(--line); border-radius: var(--radius-lg);
-    background: #fff; display: grid; gap: .35rem;
-  }
-  .office-list li.is-primary {
-    border-color: var(--sea);
-    box-shadow: 0 0 0 1px rgb(13 138 143 / .2);
-  }
-  .office-list__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
-  .office-list__head strong { font-size: var(--f-sm); color: var(--ink); }
-  .badge {
-    font-size: .7rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-    color: var(--sea); background: var(--sea-soft); padding: .2rem .5rem; border-radius: 999px;
-  }
-  .office-list__addr { font-size: var(--f-xs); color: var(--muted); }
-  .office-list a {
-    color: var(--ink); text-decoration: none; font-weight: 650; font-size: var(--f-sm);
-  }
-  .office-list a:hover { color: var(--sea); }
-  .wa-link { color: var(--sea) !important; font-weight: 600; }
-  .ct-sub-inline { font-weight: 400; color: var(--muted); font-size: var(--f-xs); }
-
-  .contact-list { list-style: none; padding: 0; display: grid; gap: var(--s5); }
+  .contact-list { list-style: none; padding: 0; display: grid; gap: var(--s5);
+                  margin-top: var(--s6); }
   .contact-list li { display: grid; grid-template-columns: 22px 1fr; gap: var(--s4);
                      align-items: start; }
   .contact-list svg { margin-top: .3em; color: var(--accent); }

@@ -80,8 +80,11 @@ const isActive = (href) => href === '/' ? path === '/' : path.startsWith(href);
     font-weight: 800; font-size: 1.15rem;
     box-shadow: inset 0 0 0 1.5px rgb(13 138 143 / .55);
   }
-  .brand__text { font-weight: 700; color: var(--ink); font-size: var(--f-md);
-                 letter-spacing: -.02em; }
+  .brand__text { font-weight: 700; color: var(--ink); font-size: var(--f-sm);
+                 letter-spacing: -.02em; max-width: 22ch; line-height: 1.2; }
+  @media (min-width: 720px) {
+    .brand__text { font-size: var(--f-sm); max-width: 28ch; }
+  }
 
   .nav__list { display: flex; gap: var(--s5); list-style: none; margin: 0; padding: 0; }
   .nav__item { position: relative; }

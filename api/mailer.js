@@ -2,7 +2,7 @@
 import nodemailer from 'nodemailer';
 
 const BRAND = {
-  name: 'Nova Source',
+  name: 'YIWU NOVASOURE IMPORT AND EXPORT CO.,LTD',
   site: 'https://seyyam-shipping-site.vercel.app',
   phone: '+86 131 5790 8374',
   accent: '#c9a227',

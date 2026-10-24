@@ -28,42 +28,19 @@ const orgSchema = {
   foundingDate: site.founded,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'NO.188, Shangcheng Avenue',
+    streetAddress: 'Room 609-2, Building 5, No. 368 Xiufa Avenue, Choujiang Street',
     addressLocality: 'Yiwu',
     addressRegion: 'Zhejiang',
     addressCountry: 'CN',
   },
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: site.phone,
-      email: site.email,
-      contactType: 'customer service',
-      areaServed: 'CN',
-      availableLanguage: ['English', 'Chinese'],
-    },
-    {
-      '@type': 'ContactPoint',
-      telephone: site.islamabadPhone,
-      contactType: 'customer service',
-      areaServed: 'PK',
-      availableLanguage: ['English', 'Urdu'],
-    },
-    {
-      '@type': 'ContactPoint',
-      telephone: site.kabulPhone,
-      contactType: 'customer service',
-      areaServed: 'AF',
-      availableLanguage: ['English', 'Pashto', 'Dari'],
-    },
-    {
-      '@type': 'ContactPoint',
-      telephone: site.dubaiPhone,
-      contactType: 'customer service',
-      areaServed: 'AE',
-      availableLanguage: ['English'],
-    },
-  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: site.phone,
+    email: site.email,
+    contactType: 'customer service',
+    areaServed: 'CN',
+    availableLanguage: ['English', 'Chinese'],
+  },
   sameAs: Object.values(site.social),
 };
 ---
